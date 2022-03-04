@@ -1,18 +1,42 @@
 #ifndef GENERIC_COMMON_H
 #define GENERIC_COMMON_H
 
-// Include the Wi-Fi library
+#include "espnode.h"
+
 #if defined(ESP32)
+// Include the Wi-Fi library
 #include <WiFi.h>
+
+// Include the Wi-Fi-Multi library
+#include <WiFiMulti.h>
+
+// Include the mDNS library for DNS
+#include <ESPmDNS.h>
+
 #elif defined(ESP8266)
+// Include the Wi-Fi library
 #include <ESP8266WiFi.h>
-#endif
 
 // Include the Wi-Fi-Multi library
 #include <ESP8266WiFiMulti.h>
 
 // Include the mDNS library for DNS
 #include <ESP8266mDNS.h>
+#endif
+
+// Include the Arduino OTA library
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
+void otaMDNSSetup(void);
+void otaUpdateSetup(void);
+
+// Include the library for Clock
+#include <NTPClient.h>
+void timeNTPClientInit(void);
+void timeNTPClientUpdate(void);
+
+void addMultipleAPToConnect(void);
+int connectToAvailableAP(void);
 
 // Include the firebase library for RTDB
 // #include <Firebase_ESP_Client.h>
@@ -29,8 +53,5 @@
 
 // Define the database secret in case we need to access database rules
 #define DATABASE_SECRET "DATABASE_SECRET"
-
-void addMultipleAPToConnect(void);
-void connectToAvailableAP(void);
 
 #endif /* GENERIC_COMMON_H */
